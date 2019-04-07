@@ -98,9 +98,18 @@ operacao(V1,V2,divisao,R) :- V1 \= 0, R is V1 / V2.
 operacao(V1,V2,multiplicacao,R) :- R is V1 * V2. 
 
 %--------------------------------- - - - - - - - - - -  -  -  -  -   -
+% Extensao do predicado operacao: Conjunto,Resultado -> {V,F}
+operacao([],_,0).
+operacao([X|L],subtracao,R) :- operacao(L,subtracao,Y), operacao(X,Y,subtracao,R).
+operacao([X|L],soma,R) :- operacao(L,soma,Y), operacao(X,Y,soma,R).
+operacao([X|L],divisao,R) :- operacao(L,divisao,Y), operacao(X,Y,divisao,R).
+operacao([X|L],multiplicacao,R) :- operacao(L,multiplicacao,Y), operacao(X,Y,multiplicacao,R).
+
+%--------------------------------- - - - - - - - - - -  -  -  -  -   -
 % Extensao do predicado maior: Valor1,Valor2,Resultado -> {V,F}
+maior(V1,V1,V1).
 maior(V1,V2,V1) :- V1 > V2.
-maior(V1,V2,V2) :- V1 < V2, V1 = V2.
+maior(V1,V2,V2) :- V1 < V2.
 
 %--------------------------------- - - - - - - - - - -  -  -  -  -   -
 % Extensao do predicado maior: Valor1,Valor2,Valor3,Resultado -> {V,F}
@@ -114,15 +123,49 @@ maior( [X],X ).
 maior( [X|L],R ) :- maior(L,Y), maior(X,Y,R). 
 
 %--------------------------------- - - - - - - - - - -  -  -  -  -   -
-% Extensao do predicado menor: Valor1,Valor2,Resultado -> {V,F}
-menor(V1,V2,V1) :- V1 < V2.
-menor(V1,V2,V2) :- V1 > V2, V1 = V2.
-
-%--------------------------------- - - - - - - - - - -  -  -  -  -   -
 % Extensao do predicado maior: Valor1,Valor2,Valor3,Resultado -> {V,F}
 maior(V1,V2,V3,V1) :- V1 < V2, V1 < V3.
 maior(V1,V2,V3,V2) :- V2 < V1, V2 < V3.
 maior(V1,V2,V3,V3).
+
+%--------------------------------- - - - - - - - - - -  -  -  -  -   -
+% Extensao do predicado menor: Valor1,Valor2,Resultado -> {V,F}
+menor(V1,V1,V1).
+menor(V1,V2,V1) :- V1 < V2.
+menor(V1,V2,V2) :- V1 > V2.
+
+%--------------------------------- - - - - - - - - - -  -  -  -  -   -
+% Extensao do predicado menor: Valor1,Valor2,Resultado -> {V,F}
+menor(V1,V2,V3,V1) :- V1 < V2, V1 < V3.
+menor(V1,V2,V3,V2) :- V1 > V2, V3 > V2.
+menor(V1,V2,V3,V3).
+
+%--------------------------------- - - - - - - - - - -  -  -  -  -   -
+% Extensao do predicado maior: Conjunto,Resultado -> {V,F}
+menor( [X],X ).
+menor( [X|L],R ) :- menor(L,Y), menor(X,Y,R).
+
+%--------------------------------- - - - - - - - - - -  -  -  -  -   -
+% Extensao do predicado comprimento: Conjunto,Resultado -> {V,F}
+comprimento([], 0).
+comprimento([H|T],N) :- comprimento(T,M), N is M+1.
+
+%--------------------------------- - - - - - - - - - -  -  -  -  -   -
+% Extensao do predicado media: Conjunto,Resultado -> {V,F}
+media( [X],X ).
+media( [X|L],R ) :- operacao([X|L],soma,Y), comprimento([X|L],C), R is Y/C.
+
+%--------------------------------- - - - - - - - - - -  -  -  -  -   -
+% Extensao do predicado crescente: Conjunto -> {V,F}
+
+%--------------------------------- - - - - - - - - - -  -  -  -  -   -
+% Extensao do predicado decrescente: Conjunto -> {V,F}
+
+%--------------------------------- - - - - - - - - - -  -  -  -  -   -
+% Extensao do predicado vazios: Conjunto -> {V,F}
+vazios([],0).
+vazios([[]|L],R) :- vazios(L,Y), R is Y+1.
+vazios([H|L],R) :- vazios(L,R).
 
 %--------------------------------- - - - - - - - - - -  -  -  -  -   -
 % Extensao do predicado pertence: valor,conjunto -> {V,F}
@@ -130,11 +173,6 @@ maior(V1,V2,V3,V3).
 %pertence([X|L],V) :- X==V ; pertence(L,V).
 pertence(X,[X|T]).
 pertence(X,[H,T]) :- X \= H, pertence(X,T).
-
-%--------------------------------- - - - - - - - - - -  -  -  -  -   -
-% Extensao do predicado comprimento: conjunto,resultado -> {V,F}
-comprimento( [],0 ). 
-comprimento( [X|L],R ) :- comprimento(L,K), R is K+1.
 
 %--------------------------------- - - - - - - - - - -  -  -  -  -   -
 % Extensao do predicado diferentes: conjunto,resultado -> {V,F}
