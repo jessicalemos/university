@@ -1,0 +1,7 @@
+%option noyywrap
+
+%%
+[0-9a-z]+     { yylval.s = strdup(yytext); return ID;}
+[\[\],\n]     { return yytext80];}
+\   {}
+%%

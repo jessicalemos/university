@@ -1,0 +1,537 @@
+Grammar
+
+    0 $accept: Programa $end
+
+    1 Programa: Decls Code
+
+    2 Decls: VAR Declaracoes
+
+    3 Declaracoes: Declaracao
+    4            | Declaracoes ';' Declaracao
+
+    5 Declaracao: ID ':' Tipo
+
+    6 Tipo: INTEGER
+
+    7 Code: CODE Instrucoes END
+
+    8 Instrucoes: Instrucao
+    9           | Instrucoes ';' Instrucao
+
+   10 Instrucao: Atrib
+   11          | Escrita
+   12          | Leitura
+
+   13 Atrib: ID '=' Expr
+
+   14 Leitura: READ '(' ID ')'
+
+   15 Escrita: PRINT '(' Expr ')'
+
+   16 Expr: Termo
+   17     | Expr '+' Termo
+   18     | Expr '-' Termo
+
+   19 Termo: Fator
+   20      | Termo '*' Fator
+   21      | Termo '/' Fator
+
+   22 Fator: NUM
+   23      | ID
+   24      | '(' Expr ')'
+
+
+Terminals, with rules where they appear
+
+$end (0) 0
+'(' (40) 14 15 24
+')' (41) 14 15 24
+'*' (42) 20
+'+' (43) 17
+'-' (45) 18
+'/' (47) 21
+':' (58) 5
+';' (59) 4 9
+'=' (61) 13
+error (256)
+INTEGER (258) 6
+VAR (259) 2
+CODE (260) 7
+END (261) 7
+PRINT (262) 15
+READ (263) 14
+ID (264) 5 13 14 23
+NUM (265) 22
+
+
+Nonterminals, with rules where they appear
+
+$accept (20)
+    on left: 0
+Programa (21)
+    on left: 1, on right: 0
+Decls (22)
+    on left: 2, on right: 1
+Declaracoes (23)
+    on left: 3 4, on right: 2 4
+Declaracao (24)
+    on left: 5, on right: 3 4
+Tipo (25)
+    on left: 6, on right: 5
+Code (26)
+    on left: 7, on right: 1
+Instrucoes (27)
+    on left: 8 9, on right: 7 9
+Instrucao (28)
+    on left: 10 11 12, on right: 8 9
+Atrib (29)
+    on left: 13, on right: 10
+Leitura (30)
+    on left: 14, on right: 12
+Escrita (31)
+    on left: 15, on right: 11
+Expr (32)
+    on left: 16 17 18, on right: 13 15 17 18 24
+Termo (33)
+    on left: 19 20 21, on right: 16 17 18 20 21
+Fator (34)
+    on left: 22 23 24, on right: 19 20 21
+
+
+State 0
+
+    0 $accept: . Programa $end
+
+    VAR  shift, and go to state 1
+
+    Programa  go to state 2
+    Decls     go to state 3
+
+
+State 1
+
+    2 Decls: VAR . Declaracoes
+
+    ID  shift, and go to state 4
+
+    Declaracoes  go to state 5
+    Declaracao   go to state 6
+
+
+State 2
+
+    0 $accept: Programa . $end
+
+    $end  shift, and go to state 7
+
+
+State 3
+
+    1 Programa: Decls . Code
+
+    CODE  shift, and go to state 8
+
+    Code  go to state 9
+
+
+State 4
+
+    5 Declaracao: ID . ':' Tipo
+
+    ':'  shift, and go to state 10
+
+
+State 5
+
+    2 Decls: VAR Declaracoes .
+    4 Declaracoes: Declaracoes . ';' Declaracao
+
+    ';'  shift, and go to state 11
+
+    $default  reduce using rule 2 (Decls)
+
+
+State 6
+
+    3 Declaracoes: Declaracao .
+
+    $default  reduce using rule 3 (Declaracoes)
+
+
+State 7
+
+    0 $accept: Programa $end .
+
+    $default  accept
+
+
+State 8
+
+    7 Code: CODE . Instrucoes END
+
+    PRINT  shift, and go to state 12
+    READ   shift, and go to state 13
+    ID     shift, and go to state 14
+
+    Instrucoes  go to state 15
+    Instrucao   go to state 16
+    Atrib       go to state 17
+    Leitura     go to state 18
+    Escrita     go to state 19
+
+
+State 9
+
+    1 Programa: Decls Code .
+
+    $default  reduce using rule 1 (Programa)
+
+
+State 10
+
+    5 Declaracao: ID ':' . Tipo
+
+    INTEGER  shift, and go to state 20
+
+    Tipo  go to state 21
+
+
+State 11
+
+    4 Declaracoes: Declaracoes ';' . Declaracao
+
+    ID  shift, and go to state 4
+
+    Declaracao  go to state 22
+
+
+State 12
+
+   15 Escrita: PRINT . '(' Expr ')'
+
+    '('  shift, and go to state 23
+
+
+State 13
+
+   14 Leitura: READ . '(' ID ')'
+
+    '('  shift, and go to state 24
+
+
+State 14
+
+   13 Atrib: ID . '=' Expr
+
+    '='  shift, and go to state 25
+
+
+State 15
+
+    7 Code: CODE Instrucoes . END
+    9 Instrucoes: Instrucoes . ';' Instrucao
+
+    END  shift, and go to state 26
+    ';'  shift, and go to state 27
+
+
+State 16
+
+    8 Instrucoes: Instrucao .
+
+    $default  reduce using rule 8 (Instrucoes)
+
+
+State 17
+
+   10 Instrucao: Atrib .
+
+    $default  reduce using rule 10 (Instrucao)
+
+
+State 18
+
+   12 Instrucao: Leitura .
+
+    $default  reduce using rule 12 (Instrucao)
+
+
+State 19
+
+   11 Instrucao: Escrita .
+
+    $default  reduce using rule 11 (Instrucao)
+
+
+State 20
+
+    6 Tipo: INTEGER .
+
+    $default  reduce using rule 6 (Tipo)
+
+
+State 21
+
+    5 Declaracao: ID ':' Tipo .
+
+    $default  reduce using rule 5 (Declaracao)
+
+
+State 22
+
+    4 Declaracoes: Declaracoes ';' Declaracao .
+
+    $default  reduce using rule 4 (Declaracoes)
+
+
+State 23
+
+   15 Escrita: PRINT '(' . Expr ')'
+
+    ID   shift, and go to state 28
+    NUM  shift, and go to state 29
+    '('  shift, and go to state 30
+
+    Expr   go to state 31
+    Termo  go to state 32
+    Fator  go to state 33
+
+
+State 24
+
+   14 Leitura: READ '(' . ID ')'
+
+    ID  shift, and go to state 34
+
+
+State 25
+
+   13 Atrib: ID '=' . Expr
+
+    ID   shift, and go to state 28
+    NUM  shift, and go to state 29
+    '('  shift, and go to state 30
+
+    Expr   go to state 35
+    Termo  go to state 32
+    Fator  go to state 33
+
+
+State 26
+
+    7 Code: CODE Instrucoes END .
+
+    $default  reduce using rule 7 (Code)
+
+
+State 27
+
+    9 Instrucoes: Instrucoes ';' . Instrucao
+
+    PRINT  shift, and go to state 12
+    READ   shift, and go to state 13
+    ID     shift, and go to state 14
+
+    Instrucao  go to state 36
+    Atrib      go to state 17
+    Leitura    go to state 18
+    Escrita    go to state 19
+
+
+State 28
+
+   23 Fator: ID .
+
+    $default  reduce using rule 23 (Fator)
+
+
+State 29
+
+   22 Fator: NUM .
+
+    $default  reduce using rule 22 (Fator)
+
+
+State 30
+
+   24 Fator: '(' . Expr ')'
+
+    ID   shift, and go to state 28
+    NUM  shift, and go to state 29
+    '('  shift, and go to state 30
+
+    Expr   go to state 37
+    Termo  go to state 32
+    Fator  go to state 33
+
+
+State 31
+
+   15 Escrita: PRINT '(' Expr . ')'
+   17 Expr: Expr . '+' Termo
+   18     | Expr . '-' Termo
+
+    ')'  shift, and go to state 38
+    '+'  shift, and go to state 39
+    '-'  shift, and go to state 40
+
+
+State 32
+
+   16 Expr: Termo .
+   20 Termo: Termo . '*' Fator
+   21      | Termo . '/' Fator
+
+    '*'  shift, and go to state 41
+    '/'  shift, and go to state 42
+
+    $default  reduce using rule 16 (Expr)
+
+
+State 33
+
+   19 Termo: Fator .
+
+    $default  reduce using rule 19 (Termo)
+
+
+State 34
+
+   14 Leitura: READ '(' ID . ')'
+
+    ')'  shift, and go to state 43
+
+
+State 35
+
+   13 Atrib: ID '=' Expr .
+   17 Expr: Expr . '+' Termo
+   18     | Expr . '-' Termo
+
+    '+'  shift, and go to state 39
+    '-'  shift, and go to state 40
+
+    $default  reduce using rule 13 (Atrib)
+
+
+State 36
+
+    9 Instrucoes: Instrucoes ';' Instrucao .
+
+    $default  reduce using rule 9 (Instrucoes)
+
+
+State 37
+
+   17 Expr: Expr . '+' Termo
+   18     | Expr . '-' Termo
+   24 Fator: '(' Expr . ')'
+
+    ')'  shift, and go to state 44
+    '+'  shift, and go to state 39
+    '-'  shift, and go to state 40
+
+
+State 38
+
+   15 Escrita: PRINT '(' Expr ')' .
+
+    $default  reduce using rule 15 (Escrita)
+
+
+State 39
+
+   17 Expr: Expr '+' . Termo
+
+    ID   shift, and go to state 28
+    NUM  shift, and go to state 29
+    '('  shift, and go to state 30
+
+    Termo  go to state 45
+    Fator  go to state 33
+
+
+State 40
+
+   18 Expr: Expr '-' . Termo
+
+    ID   shift, and go to state 28
+    NUM  shift, and go to state 29
+    '('  shift, and go to state 30
+
+    Termo  go to state 46
+    Fator  go to state 33
+
+
+State 41
+
+   20 Termo: Termo '*' . Fator
+
+    ID   shift, and go to state 28
+    NUM  shift, and go to state 29
+    '('  shift, and go to state 30
+
+    Fator  go to state 47
+
+
+State 42
+
+   21 Termo: Termo '/' . Fator
+
+    ID   shift, and go to state 28
+    NUM  shift, and go to state 29
+    '('  shift, and go to state 30
+
+    Fator  go to state 48
+
+
+State 43
+
+   14 Leitura: READ '(' ID ')' .
+
+    $default  reduce using rule 14 (Leitura)
+
+
+State 44
+
+   24 Fator: '(' Expr ')' .
+
+    $default  reduce using rule 24 (Fator)
+
+
+State 45
+
+   17 Expr: Expr '+' Termo .
+   20 Termo: Termo . '*' Fator
+   21      | Termo . '/' Fator
+
+    '*'  shift, and go to state 41
+    '/'  shift, and go to state 42
+
+    $default  reduce using rule 17 (Expr)
+
+
+State 46
+
+   18 Expr: Expr '-' Termo .
+   20 Termo: Termo . '*' Fator
+   21      | Termo . '/' Fator
+
+    '*'  shift, and go to state 41
+    '/'  shift, and go to state 42
+
+    $default  reduce using rule 18 (Expr)
+
+
+State 47
+
+   20 Termo: Termo '*' Fator .
+
+    $default  reduce using rule 20 (Termo)
+
+
+State 48
+
+   21 Termo: Termo '/' Fator .
+
+    $default  reduce using rule 21 (Termo)

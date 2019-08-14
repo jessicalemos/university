@@ -1,0 +1,3 @@
+BEGIN {FS = "::"}
+/Tio/ {print }
+
