@@ -1,8 +1,0 @@
-int function2(){
-	return 2;
-}
-
-void functionVoid(){
-	x = 4;
-}
-

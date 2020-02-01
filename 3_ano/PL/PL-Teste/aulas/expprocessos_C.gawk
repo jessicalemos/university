@@ -1,3 +1,0 @@
-BEGIN {FS = "::"}
-/Tio/ {print }
-

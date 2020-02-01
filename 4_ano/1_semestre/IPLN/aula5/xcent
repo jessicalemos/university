@@ -1,0 +1,94 @@
+#!/usr/bin/python3
+
+"""
+Xcent - extract and classify named entities
+"""
+
+import re
+import subprocess
+import sys
+from getopt import getopt
+import fileinput
+from collections import Counter
+
+
+fimfrase = r"[.?!:]\s*"
+mark_s = "#s_"
+mark_e = ("{","}")
+class_d = ':t'
+
+def markS(text):    
+    fimfrase = r"([.?!:]+\s*)"
+    text = re.sub(fimfrase, r"\1"+ mark_s, text)
+    text = re.sub(r"([A-Z][a-z]?\. )" + mark_s + r"([A-Z])", r"\1\2" , text)
+    return text
+
+def markE(text):
+    text=markD(text)
+    text=re.sub(r'\{(.*?):t\} de \{(.*?):t\}',r'{\1 de \2:t}',text)
+
+    text=markL(text)
+    
+    d = r"(?:da|do|de|dos|das)"
+    pM = r"(?:[A-ZÂ]\w+|[A-Z]\.|[A-Z][a-z]\.)"
+    nP = f"{pM}(?: {pM}| {d} {pM})*"
+    txt = re.sub(r"\b" + f"({nP})", mark_e[0] + r"\1:e" + mark_e[1], txt)
+    text = re.sub(r"{{(.*?)}",r"{\1",txt)
+
+    return text
+
+def listE(text):
+    return re.findall(r"\{(.*?)\}",text)
+
+def printE(entities):
+    for ent in entities:
+        print(ent)
+
+
+def bagE(entities):
+    # d = {}
+    # for i in entities:
+    #     d[i]=d.get(i,0)+1
+    return Counter(entities)
+
+def printBagE(b):
+    l=sorted(b.items(),key=lambda p: p[1],reverse=True)
+    for a,b in l:
+        print(b,a)
+
+def markD(txt):
+	meses="janeiro fevereiro março abril maio junho julho".split()
+	estacoes="primavera verão outono inverno".split()
+	dias=[x+"-feira" for x in "segunda terça quarta quinta sexta".split()]+("sábado domingo".split())
+	partes="manhã tarde noite".split()
+	txt=re.sub("("+"|".join(meses+estacoes+dias+partes)+")",r'{\1:t}',txt,flags=re.I)
+	txt=re.sub(r'(\b\d{4}\b)',r'{\1:t}',txt)
+	txt=re.sub(r'(\b(s(é|e)c(?:ulo|ulos|\.)?) [XLDIVMC]+)',r'{\1:t}',txt)
+	return txt 
+
+def markL(txt):
+    locais="Inglaterra América Ramalhete Galiza Lisboa Paris".split()
+    txt=re.sub("("+"|".join(locais)+")",r'{\1:l}',txt,flags=re.I)
+    return txt
+
+def main():
+    opts, resto = getopt(sys.argv[1:], "albd")
+    dop = dict(opts)
+    
+    texto = ""
+
+    # Reads file
+    for line in fileinput.input(resto):
+        texto += line
+
+    if "-a" in dop:
+        print(markE(markS(texto)))
+    elif "-l" in dop:
+        printE(listE(markE(markS(texto))))
+    elif "-b" in dop:
+        printBagE(bagE(listE(markE(markS(texto)))))
+    # elif "-d" in dop:
+    #     # print("Não Implementado!!")
+    #     printE(listE(markD(markS(texto))))
+
+main()

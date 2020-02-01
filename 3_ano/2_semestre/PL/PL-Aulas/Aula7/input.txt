@@ -1,0 +1,8 @@
+PL3 {
+	A79003 'Pedro Mendes' (18);
+	A89003 'Jessica Andreia Lemos' (17.0,16,15);
+	A99003 'Barbara Silva' (20.0, 10);
+}
+PL1 {
+	A78872  '' (13, 17);
+}

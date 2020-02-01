@@ -1,0 +1,11 @@
+VAR
+	a : INTEGER;
+	b : INTEGER;
+	c : INTEGER
+CODE
+	READ(b);
+	a = b + 2;
+	b = a * a;
+	c = (a + b) / 3;
+	PRINT(b)
+END

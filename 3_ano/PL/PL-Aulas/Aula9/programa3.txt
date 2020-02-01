@@ -1,7 +1,0 @@
-VAR
-	a : INTEGER
-CODE
-	READ(a);
-	a = a *2;
-	PRINT(a);
-END

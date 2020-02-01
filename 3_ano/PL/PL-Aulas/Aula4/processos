@@ -1,3 +1,0 @@
-BEGIN { FS = "::" }
-{ split($2, date, "[/.-]"); print date[1] }
-END { print "#"NR}
