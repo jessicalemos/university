@@ -1,0 +1,29 @@
+body {
+  padding-top: 50px;
+}
+
+.starter-template {
+  padding: 40px 15px;
+  text-align: center;
+}
+
+#footer {
+  background-color: #F5F5F5;
+}
+
+.fixed-row-bottom {
+  position: fixed; 
+  margin-bottom: 0;
+}
+
+.navbar {
+  width: 100%;
+}
+
+#navrow {
+  padding: 40px 0px;
+}
+
+.pad {
+  padding: 20px 0px;
+}

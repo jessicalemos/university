@@ -1,0 +1,175 @@
+$font-stack: Verdana, Geneva, sans-serif;
+$primary-color: #DCDCDC;
+$mid-margin: 2%;
+$small-margin: 1%;
+
+body {
+    font-family: $font-stack; 
+}
+
+header {
+    font-size: 25px;
+    margin: $mid-margin;
+}
+
+nav {
+    margin: $small-margin; 
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: $primary-color; 
+}
+
+li {
+    display: block;
+    text-align: center;
+    padding: 14px 16px;
+    float: left; 
+}
+
+aside {
+    height: 490px;
+    background-color: $primary-color;
+    position: relative;
+    float: right;
+    width: 20%;
+    margin-right: $small-margin;
+    margin-left: $small-margin;
+    margin-bottom: $small-margin; 
+}
+
+main {
+    position: relative;
+    float: left;
+    width: 78%;
+    height: 3em; 
+}
+
+footer {
+    background-color: $primary-color;
+    position: absolute;
+    bottom: 8px;
+    width: 98%;
+    margin-right: $small-margin;
+    margin-left: $small-margin; 
+}
+
+table {
+    border-collapse: collapse;
+    margin-right: $small-margin;
+    margin-left: $small-margin; 
+}
+
+table td, th {
+    padding: 5px;
+    width: 19% !important;
+    vertical-align: middle;
+    height: 10px !important;
+    overflow: visible;
+    line-height: 25px;
+    border: 1px solid $primary-color; 
+}
+
+th {
+    background-color: gray; 
+}
+
+.topnav-right {
+    float: right; 
+}
+
+.filter select {
+    width: 80%;
+    margin-top: 5%;
+    margin-right: $mid-margin;
+    margin-left: $mid-margin; 
+}
+
+.filter button {
+    width: 90%;
+    margin-top: 5%;
+    margin-right: $mid-margin;
+    margin-left: $mid-margin; 
+}
+
+.filter {
+    margin-top: 4%;
+    margin-right: $mid-margin;
+    margin-left: 5%; 
+}
+
+form {
+    left: 30%;
+    position: absolute; 
+}
+
+.box {
+    width: 400px;
+}
+
+.description-box {
+    width: 400px;
+    padding: 50px 0px;
+}
+
+.al {
+    padding-left: 100px; 
+}
+
+.save {
+    width: 100px;
+    height: 30px; 
+}
+
+.pagination a {
+    background-color: $primary-color;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    margin: 2px; 
+}
+
+.pagination {
+    position: fixed;
+    bottom: 7%;
+    right: 25%; 
+}
+
+$media: "max-width: 800px";
+@media ($media) {
+    aside {
+        margin-right: $small-margin;
+        margin-left: $small-margin;
+        margin-bottom: $small-margin;
+        float: none;
+        height: 60px;
+        width: 98%; 
+    }
+
+    .filter select {
+        width: 20%;
+        margin-top: $mid-margin;
+        margin-right: $mid-margin;
+        margin-left: $mid-margin; 
+    }
+
+    .filter {
+        margin-top: $mid-margin;
+        margin-right: $mid-margin;
+        margin-left: $mid-margin; 
+    }
+
+    main {
+        width: 98%;
+        height: 3em; 
+    }
+
+    .pagination {
+        bottom: 7%;
+        right: 1%; 
+    } 
+}

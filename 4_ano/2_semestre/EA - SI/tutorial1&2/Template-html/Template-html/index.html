@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+    	<meta name="description" content="">
+    	<meta name="author" content="">
+    	<link rel="icon" href="favicon.ico">
+    	<title>Template</title>
+    	<link rel="stylesheet" type="text/css" href="style/reset.css">
+    	<link rel="stylesheet" type="text/css" href="style/style.css">
+		<script src="https://code.jquery.com/jquery-3.1.1.min.js"
+  			integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+  			crossorigin="anonymous"></script>
+	</head>
+
+	<body>
+		<header>
+		GamesLibrary
+		</header>
+		<nav>
+			<ul>
+				<li>User name</li>
+				<div class="topnav-right">
+					<li><a href="index.html">All Games</a></li>
+					<li><a href="mygames.html">My Games</a></li>
+					<li><a href="addgame.html">Add Games</a></li>
+				</div>
+			</ul>
+		</nav>
+
+		<section class="allgames">
+			<aside>
+                <div class="filter">
+                    <p>Filter</p>
+                    <select name="year" form="yearform">
+                        <option value="year">year</option>
+                    </select>
+                    <select name="platform" form="platform">
+                        <option value="platform">platform</option>
+                    </select>
+                </div>
+			</aside>
+			<main>
+				<table style="width:100%">
+					<tr class="">
+						<th>Games</th>
+						<th>Year</th> 
+						<th>Platform</th>
+					</tr>
+					<tr>
+						<td>Game 1</td>
+						<td>1992</td>
+						<td>Megadrive</td>
+					</tr>
+					<tr>
+						<td>Game 2</td>
+						<td>2017</td>
+						<td>PC</td>
+					</tr>
+				</table>
+				<div class="pagination">
+					<a href="#">1</a>
+					<a class="#" href="#">2</a>
+					<a href="#">3</a>
+				</div>
+			</main>
+            <footer>
+				<center>Footer information</center>
+			</footer>
+		</section>
+	</body>
+	<script src="script/script.js"></script>
+
+</html>
