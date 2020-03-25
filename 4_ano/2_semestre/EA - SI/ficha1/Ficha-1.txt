@@ -1,0 +1,145 @@
+1.
+P
+BB
+K
+---
+M
+P
+BB
+M
+K
+
+P BB K / M P BB M KK
+Resulta em 1.58 s / 3.98 s﻿﻿﻿﻿
+
+Que é um resultado melhor do que 3.5 s / 7.1s e 4.8s / 9.6s das restantes soluções.
+
+
+2.
+
+P B P B //Selecionar a posição ; Click ; Selecionar o nº ; Confirmar
+* 9
+= P B P B P B P B P B P B P B P B P B P B P B P B P B P B P B P B P B P B
+= 21.6 s
+
+P B // Posicionar para escrever o nome
+
+T(20) = 20 * 0.28 = 5.6
+
+P B KKKKKKKKK P B 
+-...
+
+P B P B //Selecionar a posição ; Click ; Selecionar o nº ; Confirmar
+
+* 9 (por número do NIF)
+
+= P B P B P B P B P B P B P B P B P B P B P B P B P B P B P B P B P B P B
+
+= 21.6 s
+
+Posiciona para escrever o nome,
+
+P BB = 1.3 s
+
+Para um nome de 20 caracteres,
+
+T(20) = 20 * 0.28 = 5.6s
+
+Logo 28.5s no total
+
+Tendo em conta que deve pensar antes de cada número do NIF, passamos a ter
+
+M P B P B M P B P B M P B P B M P B P B M P B P B M P B P B M P B P B M P B P B M P B P B 
+
+Que resulta em 32.4s
+
+Com o tempo do posicionamento mais a escrita do nome, M P BB T(20), passamos a ter 40.6 s
+
+
+
+Relativamente à versão de input textual, temos
+
+P BB KKKKKKKKK // NIF
+
+P BB // Posicionar para o nome
+
+= 5.12s
+
+T(20) //Nome 
+
+Que resulta em, 10.72s
+
+Tendo em conta o tempo de pensamento,
+
+M P BB  M KKKKKKKKK // NIF = 6.22 s
+M P BB T(20) // Nome  = 2.50s + 5.6s = 8.1 s
+No total, 14.32s
+Pelo que a segunda solução é bastante mais rápida.
+
+3.
+Tempo de um preenchimento da informação de uma publicação:
+
+M P BB //Posicionamento de cada zona (url, ano, ..) = 2.5 s
+
+* 4 =10 s
+T(134) = 0.28 * (10 + 4 + 30 + 90) = 37.52s //Tempo de escrita
+4 * M = 4 * 1.2 s = 4.8 s //Tempo de pensamento antes de escrever em cada campo
+Que resulta em 52.32 s
+Para a versão do primeiro vídeo, temos
+S // Scroll para chegar no patamar do botão 'Adicionar'
+* 2 // Adicionamos 2 artigos
+P M BB // Clicar em 'Adicionar' novo artigo = 2.5s
+* 2 // Adicionamos 2 artigos
+Tempo de preenchimento * 2 = 104.64 s
+P M BB // Clicar em 'Gravar / Save' = 2.5 s
+* 2 // Por artigo
+W(20) * 2 = 40 s // Esperamos por cada artigo
+No total: 159.84 s
+Relativamente à versão do video 2
+S // Scroll para chegar no patamar do botão 'Adicionar'
+
+P M BB // Clicar em 'Adicionar' novo artigo = 2.5s
+
+Tempo de preenchimento * 2 = 104.64 s
+
+
+P M BB // Clicar em 'Gravar / Save' = 2.5 s
+W(20) = 20 s // Esperamos pela resposta do sistema
+Total: 132.24 s
+
+Pelo que a segunda solução é melhor.
+
+Esta análise foi feita tendo em conta a não existência de TABS/seleção automática
+
+O custo adicional corresponde a:
+
+
+M P BB //Posicionamento de cada zona (url, ano, ..) = 2.5 s 
+*4 = 10 s
+Pelo que se poupa 10 segundos por publicação.
+
+
+
+4. 
+Slips - Ordem de preenchimento de campos errada, quando alguns dependiam de anteriores.﻿
+Lapses -﻿﻿﻿ Marcar checkboxes erradas por distração ; Quando existem alguns botões de 'Confirmar'/'Guardar' associados a diferentes componentes, e se clica no botão associado a uma componente que não a que nos interessava.
+
+Mistakes - ﻿﻿Upload de um ficheiro não relacionado com o ficheiro pretendido pela plataforma.
+
+5.
+Utilizadores Diretos - Funcionário da receção aos clientes (Anotar pedidos, receber pagamentos, ...)
+Utilizadores Indiretos -  Clientes do restaurante
+
+Utilizadores Remotos - Funcionários da cozinha, que necessitam de acesso aos pedidos efetuados pelos clientes ; Donos/Administração do Restaurante ; Empregados de Mesa
+
+Utilizadores de Suporte -  Administração do Restaurante
+
+
+
+Persona: Funcionário da receção
+
+- Forma prática de anotar os pedidos, sempre com a possibilidade de remover um pedido erradamente selecionado
+
+- Ter acesso aos pedidos que ainda não foram atendidos,  visto que, para ser capaz de auxiliar os funcionários da cozinha/de mesa caso seja preciso
+
+- Ter informação associada aos pedidos desde um nível baixo (funcionamento normal, preço e quantidade) até um grau mais elevado(descrição do prato, ingredientes, ..., para conseguir fornecer esse tipo de informação aos clientes, caso estes solicitem)  

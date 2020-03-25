@@ -57,15 +57,16 @@ if __name__ == '__main__':
 
     #make this until it converge
     t = 1.0
+    N = 10000
     deltas = []
-    for iteration in range(10000):
+    for iteration in range(N):
         if iteration % 100 == 0:
             t += 1e-2
 
         #let's start!
         state = (2, 0)
         grid.set_state(state)
-        action, _ = max_q(Q[state])
+        action = max_q(Q[state])[0]
         delta = 0  # track updates
         while not grid.game_over():
             action = epsilon_greedy(action, epsilon=0.5/t)

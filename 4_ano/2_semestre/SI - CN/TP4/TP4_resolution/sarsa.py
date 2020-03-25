@@ -57,8 +57,9 @@ if __name__ == '__main__':
 
     #make this until it converge
     t = 1.0
+    N = 10000
     deltas = []
-    for iteration in range(10000):
+    for iteration in range(N):
         if iteration % 100 == 0:
             t += 1e-2
 
