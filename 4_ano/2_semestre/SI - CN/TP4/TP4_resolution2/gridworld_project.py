@@ -3,56 +3,41 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # rewards per state per action (order: up, down, left, right)
-# rewards = wall (0) | -1 (move) | -10 (avoid position) | 100 (goal)
+# rewards = movements and wall (0) | -1 (penalizer_position) | +1 (goal_reward)
+
 '''
 Matrix RF (Rewards representation)
 Note: each movement provides a -1 reward
----------------------
-| S  |-10 | X  | X  |
----------------------
-| X  | X  |-10 |+100|
----------------------
-| X  | X  | X  | X  |
----------------------
-| X  | X  | X  | X  |
----------------------
-'''
-'''
----------------------
-| X  | X  | X  |+100|
----------------------
-| X  | W  | X  |-10 |
----------------------
-| S  | X  | X  | X  |
----------------------
-'''
 
-Goal_reward = 100
-Penalizer_reward = -10
-Penalizer_movement = -1
+---------------------
+|    |    |    |+10 |
+---------------------
+|    | W  |    |-10 |
+---------------------
+| S  |    |    |    |
+---------------------
+'''
+Goal_reward = 1
+Penalizer_reward = -1
+Penalizer_movement = -0.05
 Wall_reward = 0
-Start_Position = 0
-End_Position = 7
+Start_Position = 8
+End_Position = 3
 
 reward = np.array([[Wall_reward, Penalizer_movement, Wall_reward, Penalizer_reward],                    # position (0,0) - State 0
-                   [Wall_reward, Penalizer_movement, Penalizer_movement, Penalizer_movement],           # position (0,1) - State 1
-                   [Wall_reward, Penalizer_reward, Penalizer_reward, Penalizer_movement],               # position (0,2) - State 2
-                   [Wall_reward, Goal_reward, Penalizer_movement, Wall_reward],                         # position (0,3) - State 3
+                   [Wall_reward, Wall_reward, Penalizer_movement, Penalizer_movement],                  # position (0,1) - State 1
+                   [Wall_reward, Penalizer_movement, Penalizer_movement, Goal_reward],                  # position (0,2) - State 2
+                   [Wall_reward, Penalizer_reward, Penalizer_movement, Wall_reward],                    # position (0,3) - State 3
                    
-                   [Penalizer_movement, Penalizer_movement, Wall_reward, Penalizer_movement],           # position (1,0) - State 4
-                   [Penalizer_reward, Penalizer_movement, Penalizer_movement, Penalizer_reward],        # position (1,1) - State 5
-                   [Penalizer_movement, Penalizer_movement, Penalizer_movement, Penalizer_movement],    # position (1,2) - State 6
-                   [Penalizer_movement, Penalizer_movement, Penalizer_reward, Goal_reward],             # position (1,3) - State 7
+                   [Penalizer_movement, Penalizer_movement, Wall_reward, Wall_reward],                  # position (1,0) - State 4
+                   [Wall_reward, Wall_reward, Wall_reward, Wall_reward],                                # position (1,1) - State 5
+                   [Penalizer_movement, Penalizer_movement, Wall_reward, Penalizer_reward],             # position (1,2) - State 6
+                   [Goal_reward, Penalizer_movement, Penalizer_movement, Wall_reward],                    # position (1,3) - State 7
                    
-                   [Penalizer_movement, Penalizer_movement, Wall_reward, Penalizer_movement],           # position (2,0) - State 8
-                   [Penalizer_movement, Penalizer_movement, Penalizer_movement, Penalizer_movement],    # position (2,1) - State 9
-                   [Penalizer_reward, Penalizer_movement, Penalizer_movement, Penalizer_movement],      # position (2,2) - State 10
-                   [Goal_reward, Penalizer_movement, Penalizer_movement, Wall_reward],                  # position (2,3) - State 11
-                   
-                   [Penalizer_movement, Wall_reward, Wall_reward, Penalizer_movement],                  # position (3,0) - State 12
-                   [Penalizer_movement, Wall_reward, Penalizer_movement, Penalizer_movement],           # position (3,1) - State 13
-                   [Penalizer_movement, Wall_reward, Penalizer_movement, Penalizer_movement],           # position (3,2) - State 14
-                   [Penalizer_movement, Wall_reward, Penalizer_movement, Wall_reward]])                 # position (3,3) - State 15
+                   [Penalizer_movement, Wall_reward, Wall_reward, Penalizer_movement],                  # position (2,0) - State 8
+                   [Wall_reward, Wall_reward, Penalizer_movement, Penalizer_movement],                  # position (2,1) - State 9
+                   [Penalizer_movement, Wall_reward, Penalizer_movement, Penalizer_movement],           # position (2,2) - State 10
+                   [Penalizer_reward, Wall_reward, Penalizer_movement, Wall_reward]])                  # position (2,3) - State 11
 
 # n_s defines the position/state of the agent after doing an action (i.e. order: up, down, left, right)
 # example: position (0,0) / State 0 - [-1 (no-position when going up), 4 (position 4 when going down), -1 (no-position when going left), 1 (position 1 when going right)]
@@ -65,30 +50,20 @@ Matrix RF (States representation)
 | 4  | 5  | 6  | 7  |
 ---------------------
 | 8  | 9  | 10 | 11 |
----------------------
-| 12 | 13 | 14 | 15 |
----------------------
+--------------------- 
 '''
-
-n_s = np.array([[-1,4,-1,1],  # position (0,0) - State 0
-               [-1,5,0,2],    # position (1,0) - State 1
-               [-1,6,1,3],    # position (2,0) - State 2
-               [-1,7,2,-1],   # position (3,0) - State 3
-                
-               [0,8,-1,5],      # position (1,0) - State 4
+n_s = np.array([[-1,4,-1,1],    # position (0,0) - State 0
+               [-1,-1,0,2],     # position (1,0) - State 1
+               [-1,6,1,3],      # position (2,0) - State 2
+               [-1,7,2,-1],     # position (3,0) - State 3              
+               [0,8,-1,-1],     # position (1,0) - State 4
                [1,9,4,6],       # position (1,1) - State 5
-               [2,10,5,7],      # position (1,2) - State 6
-               [3,11,6,-1],     # position (1,3) - State 7
-                
-               [4,12,-1,9],     # position (2,0) - State 8
-               [5,13,8,10],     # position (2,1) - State 9
-               [6,14,9,11],     # position (2,2) - State 10
-               [7,15,10,-1],    # position (2,3) - State 11
-                
-               [8,-1,-1,13],        # position (3,0) - State 12
-               [9,-1,12,14],        # position (3,1) - State 13
-               [10,-1,13,15],       # position (3,2) - State 14
-               [11,-1,14,-1]])      # position (3,3) - State 15
+               [2,10,-1,7],     # position (1,2) - State 6
+               [3,11,6,-1],     # position (1,3) - State 7               
+               [4,-1,-1,9],     # position (2,0) - State 8
+               [-1,-1,8,10],    # position (2,1) - State 9
+               [6,-1,9,11],     # position (2,2) - State 10
+               [7,-1,10,-1]])   # position (2,3) - State 11
 
 # available actions per state / position
 # actions = up (0) | down (1) | left (2) | right (3)
@@ -101,34 +76,25 @@ Actions acording to the Environment Matrix (States representation)
 | 4  | 5  | 6  | 7  |
 ---------------------
 | 8  | 9  | 10 | 11 |
----------------------
-| 12 | 13 | 14 | 15 |
----------------------
+--------------------- 
 '''
 UP = 0
 DOWN = 1
 LEFT = 2
 RIGHT = 3
 
-action = np.array([[DOWN,RIGHT],            # position (0,0) - State 0
-                  [DOWN, LEFT, RIGHT],      # position (0,1) - State 1
-                  [DOWN, LEFT, RIGHT],      # position (0,2) - State 2
-                  [DOWN, LEFT],             # position (0,3) - State 3
-                   
-                  [UP,DOWN,RIGHT],          # position (1,0) - State 4
-                   [UP,DOWN,LEFT,RIGHT],    # position (1,1) - State 5
-                   [UP,DOWN,LEFT,RIGHT],    # position (1,2) - State 6
-                   [UP,DOWN,LEFT],          # position (1,3) - State 7
-                   
-                   [UP,DOWN,RIGHT],         # position (2,0) - State 8
-                   [UP,DOWN,LEFT,RIGHT],    # position (2,1) - State 9
-                   [UP,DOWN,LEFT,RIGHT],    # position (2,2) - State 10
-                   [UP,DOWN,LEFT],          # position (2,3) - State 11
-                   
-                   [UP,RIGHT],              # position (3,0) - State 12
-                   [UP,LEFT,RIGHT],         # position (3,1) - State 13
-                   [UP,LEFT,RIGHT],         # position (3,2) - State 14
-                   [UP,LEFT]])              # position (3,3) - State 15
+action = np.array([[DOWN,RIGHT],         # position (0,0) - State 0
+                  [LEFT, RIGHT],         # position (0,1) - State 1
+                  [DOWN, LEFT, RIGHT],   # position (0,2) - State 2
+                  [DOWN, LEFT],          # position (0,3) - State 3
+                  [UP,DOWN],             # position (1,0) - State 4
+                  [UP,DOWN,LEFT,RIGHT],  # position (1,1) - State 5
+                  [UP,DOWN,RIGHT],       # position (1,2) - State 6
+                  [UP,DOWN,LEFT],        # position (1,3) - State 7
+                  [UP,RIGHT],            # position (2,0) - State 8
+                  [LEFT,RIGHT],          # position (2,1) - State 9
+                  [UP,LEFT,RIGHT],       # position (2,2) - State 10
+                  [UP,LEFT]])            # position (2,3) - State 11
 
 
 def find_convergence_episode(rewards_list, buffer_size=3):
@@ -187,7 +153,6 @@ def Q_learning_gridworld(start_state = 0, end_state = 1, Gamma=0.7, learning_rat
         path = []                           # Path taken
 
         while(current_state != end_state): # Run Agent until goal is met (when receives reward of +100)
-            
             # Decision Making Policy
             Qx = -999 # init to -999 in order to determine max. Q value
             # Determine next action based on: available actions in position and exploitation policy (i.e., greedy policy)
@@ -216,6 +181,7 @@ def Q_learning_gridworld(start_state = 0, end_state = 1, Gamma=0.7, learning_rat
             Q[current_state][act] = Q[current_state][act] + learning_rate * (reward[current_state][act] + Gamma * max_Q_value - Q[current_state][act])
             
             # Save current position in Path list and update current_state
+            #print(current_state, next_state)
             path.append(current_state)
             current_state = next_state
 
@@ -351,7 +317,7 @@ LEARNING_RATE = 0.7
 GAMMA_DISCOUNT = 0.7
 EPSILON = 0.3
 EPSILON_DEGRADATION = 0.03
-LOG = 0
+LOG = 1
 
 SARSA_paths_list, SARSA_rewards_list, SARSA_n_actions_list = SARSA_gridworld(start_state=Start_Position, end_state=End_Position, Epsilon=EPSILON, Gamma=GAMMA_DISCOUNT, learning_rate = LEARNING_RATE, max_n_episodes = MAX_N_EPISODES, Epsilon_degradation = EPSILON_DEGRADATION, log = LOG)
 Q_learning_paths_list, Q_learning_rewards_list, Q_learning_n_actions_list = Q_learning_gridworld(start_state=Start_Position, end_state=End_Position, Gamma=GAMMA_DISCOUNT, learning_rate = LEARNING_RATE, max_n_episodes = MAX_N_EPISODES, log = LOG)
