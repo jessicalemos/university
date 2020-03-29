@@ -314,7 +314,7 @@ def SARSA_gridworld(start_state = 0, end_state = 1, Epsilon=0.3, Gamma=0.7, lear
 # Train both Reinforcement Learning approaches: Q-Learning vs SARSA
 MAX_N_EPISODES = 20
 LEARNING_RATE = 0.7
-GAMMA_DISCOUNT = 0.7
+GAMMA_DISCOUNT = 0.9
 EPSILON = 0.3
 EPSILON_DEGRADATION = 0.03
 LOG = 1
@@ -327,3 +327,6 @@ plt.plot(episodes, Q_learning_rewards_list, label = "Q-Learning")
 plt.xlabel('Number of episodes') 
 plt.ylabel('Rewards') 
 plt.show()
+
+print("Number episodes to converge SARSA: ", find_convergence_episode(SARSA_rewards_list, buffer_size=3))
+print("Number episodes to converge Q-learning: ", find_convergence_episode(Q_learning_rewards_list, buffer_size=3))
