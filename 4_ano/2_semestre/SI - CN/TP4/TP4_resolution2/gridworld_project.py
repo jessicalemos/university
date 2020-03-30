@@ -3,7 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # rewards per state per action (order: up, down, left, right)
-# rewards = movements and wall (0) | -1 (penalizer_position) | +1 (goal_reward)
+# rewards = wall (0) | -0.05 (move) | -1 (penalize position) | +1 (goal)
 
 '''
 Matrix RF (Rewards representation)

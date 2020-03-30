@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7c0925b9-807a-4d32-91a8-c10166041273" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../SI - CN/TP4/TP4_resolution/TP4_resolution.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SI - CN/TP4/TP4_resolution/qlearning.py" beforeDir="false" afterPath="$PROJECT_DIR$/../SI - CN/TP4/TP4_resolution/qlearning.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SI - CN/TP4/TP4_resolution/sarsa.py" beforeDir="false" afterPath="$PROJECT_DIR$/../SI - CN/TP4/TP4_resolution/sarsa.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SI - CN/TP4/TP4_resolution2/CN-TP4.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/../SI - CN/TP4/TP4_resolution2/CN-TP4.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SI - CN/TP4/TP4_resolution2/gridworld_project.py" beforeDir="false" afterPath="$PROJECT_DIR$/../SI - CN/TP4/TP4_resolution2/gridworld_project.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -14,32 +14,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/MyCallback.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="9" column="51" selection-start-line="9" selection-start-column="51" selection-end-line="9" selection-end-column="51" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/MQTT_Test.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="203">
-              <caret line="30" column="11" selection-start-line="30" selection-start-column="11" selection-end-line="30" selection-end-column="11" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -66,7 +41,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="y" value="-1" />
     <option name="width" value="1366" />
     <option name="height" value="728" />
@@ -77,24 +52,9 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="feed" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SI - SA" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="feed" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SI - SA" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-      <pane id="PackagesPane" />
+      <pane id="ProjectPane" />
       <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -155,16 +115,17 @@
       <updated>1584977868406</updated>
       <workItem from="1584977873067" duration="4504000" />
       <workItem from="1585127887155" duration="18897000" />
+      <workItem from="1585577188242" duration="195000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="23401000" />
+    <option name="totallyTimeSpent" value="23596000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="-1" width="1366" height="728" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25378788" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25757575" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -199,16 +160,7 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/tofeed.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="23" selection-start-line="7" selection-start-column="23" selection-end-line="7" selection-end-column="23" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/tofeed.java" />
     <entry file="file://$PROJECT_DIR$/src/MyCallback.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
@@ -221,7 +173,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/MQTT_Test.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="203">
+        <state relative-caret-position="450">
           <caret line="30" column="11" selection-start-line="30" selection-start-column="11" selection-end-line="30" selection-end-column="11" />
           <folding>
             <element signature="imports" expanded="true" />
