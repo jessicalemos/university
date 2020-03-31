@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/pt.iml" filepath="$PROJECT_DIR$/.idea/pt.iml" />
+      <module fileurl="file://$PROJECT_DIR$/persistency.iml" filepath="$PROJECT_DIR$/persistency.iml" />
     </modules>
   </component>
 </project>

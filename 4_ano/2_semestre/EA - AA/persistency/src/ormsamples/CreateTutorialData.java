@@ -5,19 +5,21 @@
 package ormsamples;
 
 import org.orm.*;
+import uminho.di.aa.*;
+
 public class CreateTutorialData {
 	public void createTestData() throws PersistentException {
-		PersistentTransaction t = pt.uminho.di.aa.TutorialPersistentManager.instance().getSession().beginTransaction();
+		PersistentTransaction t = TutorialPersistentManager.instance().getSession().beginTransaction();
 		try {
-			pt.uminho.di.aa.User lptuminhodiaaUser = pt.uminho.di.aa.UserDAO.createUser();
+			User lptuminhodiaaUser = UserDAO.createUser();
 			// Initialize the properties of the persistent object here
-			pt.uminho.di.aa.UserDAO.save(lptuminhodiaaUser);
-			pt.uminho.di.aa.Game lptuminhodiaaGame = pt.uminho.di.aa.GameDAO.createGame();
+			UserDAO.save(lptuminhodiaaUser);
+			Game lptuminhodiaaGame = GameDAO.createGame();
 			// TODO Initialize the properties of the persistent object here, the following properties must be initialized before saving : price, year
-			pt.uminho.di.aa.GameDAO.save(lptuminhodiaaGame);
-			pt.uminho.di.aa.Platform lptuminhodiaaPlatform = pt.uminho.di.aa.PlatformDAO.createPlatform();
+			GameDAO.save(lptuminhodiaaGame);
+			Platform lptuminhodiaaPlatform = PlatformDAO.createPlatform();
 			// TODO Initialize the properties of the persistent object here, the following properties must be initialized before saving : year
-			pt.uminho.di.aa.PlatformDAO.save(lptuminhodiaaPlatform);
+			PlatformDAO.save(lptuminhodiaaPlatform);
 			t.commit();
 		}
 		catch (Exception e) {
@@ -33,7 +35,7 @@ public class CreateTutorialData {
 				createTutorialData.createTestData();
 			}
 			finally {
-				pt.uminho.di.aa.TutorialPersistentManager.instance().disposePersistentManager();
+				TutorialPersistentManager.instance().disposePersistentManager();
 			}
 		}
 		catch (Exception e) {

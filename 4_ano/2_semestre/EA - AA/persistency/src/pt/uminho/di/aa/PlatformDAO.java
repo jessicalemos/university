@@ -11,7 +11,7 @@
  * Licensee: jessica(Universidade do Minho)
  * License Type: Academic
  */
-package pt.uminho.di.aa;
+package uminho.di.aa;
 
 import org.orm.*;
 import org.hibernate.Query;
@@ -65,7 +65,7 @@ public class PlatformDAO {
 	
 	public static Platform loadPlatformByORMID(PersistentSession session, int ID) throws PersistentException {
 		try {
-			return (Platform) session.load(pt.uminho.di.aa.Platform.class, new Integer(ID));
+			return (Platform) session.load(Platform.class, new Integer(ID));
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -75,7 +75,7 @@ public class PlatformDAO {
 	
 	public static Platform getPlatformByORMID(PersistentSession session, int ID) throws PersistentException {
 		try {
-			return (Platform) session.get(pt.uminho.di.aa.Platform.class, new Integer(ID));
+			return (Platform) session.get(Platform.class, new Integer(ID));
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -85,7 +85,7 @@ public class PlatformDAO {
 	
 	public static Platform loadPlatformByORMID(PersistentSession session, int ID, org.hibernate.LockMode lockMode) throws PersistentException {
 		try {
-			return (Platform) session.load(pt.uminho.di.aa.Platform.class, new Integer(ID), lockMode);
+			return (Platform) session.load(Platform.class, new Integer(ID), lockMode);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -95,7 +95,7 @@ public class PlatformDAO {
 	
 	public static Platform getPlatformByORMID(PersistentSession session, int ID, org.hibernate.LockMode lockMode) throws PersistentException {
 		try {
-			return (Platform) session.get(pt.uminho.di.aa.Platform.class, new Integer(ID), lockMode);
+			return (Platform) session.get(Platform.class, new Integer(ID), lockMode);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -296,10 +296,10 @@ public class PlatformDAO {
 	}
 	
 	public static Platform createPlatform() {
-		return new pt.uminho.di.aa.Platform();
+		return new Platform();
 	}
 	
-	public static boolean save(pt.uminho.di.aa.Platform platform) throws PersistentException {
+	public static boolean save(Platform platform) throws PersistentException {
 		try {
 			TutorialPersistentManager.instance().saveObject(platform);
 			return true;
@@ -310,7 +310,7 @@ public class PlatformDAO {
 		}
 	}
 	
-	public static boolean delete(pt.uminho.di.aa.Platform platform) throws PersistentException {
+	public static boolean delete(Platform platform) throws PersistentException {
 		try {
 			TutorialPersistentManager.instance().deleteObject(platform);
 			return true;
@@ -321,7 +321,7 @@ public class PlatformDAO {
 		}
 	}
 	
-	public static boolean refresh(pt.uminho.di.aa.Platform platform) throws PersistentException {
+	public static boolean refresh(Platform platform) throws PersistentException {
 		try {
 			TutorialPersistentManager.instance().getSession().refresh(platform);
 			return true;
@@ -332,7 +332,7 @@ public class PlatformDAO {
 		}
 	}
 	
-	public static boolean evict(pt.uminho.di.aa.Platform platform) throws PersistentException {
+	public static boolean evict(Platform platform) throws PersistentException {
 		try {
 			TutorialPersistentManager.instance().getSession().evict(platform);
 			return true;

@@ -5,12 +5,14 @@
 package ormsamples;
 
 import org.orm.*;
+import uminho.di.aa.*;
+
 public class ListTutorialData {
 	private static final int ROW_COUNT = 100;
 	
 	public void listTestData() throws PersistentException {
 		System.out.println("Listing User...");
-		pt.uminho.di.aa.User[] ptuminhodiaaUsers = pt.uminho.di.aa.UserDAO.listUserByQuery(null, null);
+		User[] ptuminhodiaaUsers = UserDAO.listUserByQuery(null, null);
 		int length = Math.min(ptuminhodiaaUsers.length, ROW_COUNT);
 		for (int i = 0; i < length; i++) {
 			System.out.println(ptuminhodiaaUsers[i]);
@@ -18,7 +20,7 @@ public class ListTutorialData {
 		System.out.println(length + " record(s) retrieved.");
 		
 		System.out.println("Listing Game...");
-		pt.uminho.di.aa.Game[] ptuminhodiaaGames = pt.uminho.di.aa.GameDAO.listGameByQuery(null, null);
+		Game[] ptuminhodiaaGames = GameDAO.listGameByQuery(null, null);
 		length = Math.min(ptuminhodiaaGames.length, ROW_COUNT);
 		for (int i = 0; i < length; i++) {
 			System.out.println(ptuminhodiaaGames[i]);
@@ -26,7 +28,7 @@ public class ListTutorialData {
 		System.out.println(length + " record(s) retrieved.");
 		
 		System.out.println("Listing Platform...");
-		pt.uminho.di.aa.Platform[] ptuminhodiaaPlatforms = pt.uminho.di.aa.PlatformDAO.listPlatformByQuery(null, null);
+		Platform[] ptuminhodiaaPlatforms = PlatformDAO.listPlatformByQuery(null, null);
 		length = Math.min(ptuminhodiaaPlatforms.length, ROW_COUNT);
 		for (int i = 0; i < length; i++) {
 			System.out.println(ptuminhodiaaPlatforms[i]);
@@ -37,11 +39,11 @@ public class ListTutorialData {
 	
 	public void listByCriteria() throws PersistentException {
 		System.out.println("Listing User by Criteria...");
-		pt.uminho.di.aa.UserCriteria lptuminhodiaaUserCriteria = new pt.uminho.di.aa.UserCriteria();
+		UserCriteria lptuminhodiaaUserCriteria = new UserCriteria();
 		// Please uncomment the follow line and fill in parameter(s) 
 		//lptuminhodiaaUserCriteria.ID.eq();
 		lptuminhodiaaUserCriteria.setMaxResults(ROW_COUNT);
-		pt.uminho.di.aa.User[] ptuminhodiaaUsers = lptuminhodiaaUserCriteria.listUser();
+		User[] ptuminhodiaaUsers = lptuminhodiaaUserCriteria.listUser();
 		int length =ptuminhodiaaUsers== null ? 0 : Math.min(ptuminhodiaaUsers.length, ROW_COUNT); 
 		for (int i = 0; i < length; i++) {
 			 System.out.println(ptuminhodiaaUsers[i]);
@@ -49,11 +51,11 @@ public class ListTutorialData {
 		System.out.println(length + " User record(s) retrieved."); 
 		
 		System.out.println("Listing Game by Criteria...");
-		pt.uminho.di.aa.GameCriteria lptuminhodiaaGameCriteria = new pt.uminho.di.aa.GameCriteria();
+		GameCriteria lptuminhodiaaGameCriteria = new GameCriteria();
 		// Please uncomment the follow line and fill in parameter(s) 
 		//lptuminhodiaaGameCriteria.ID.eq();
 		lptuminhodiaaGameCriteria.setMaxResults(ROW_COUNT);
-		pt.uminho.di.aa.Game[] ptuminhodiaaGames = lptuminhodiaaGameCriteria.listGame();
+		Game[] ptuminhodiaaGames = lptuminhodiaaGameCriteria.listGame();
 		length =ptuminhodiaaGames== null ? 0 : Math.min(ptuminhodiaaGames.length, ROW_COUNT); 
 		for (int i = 0; i < length; i++) {
 			 System.out.println(ptuminhodiaaGames[i]);
@@ -61,11 +63,11 @@ public class ListTutorialData {
 		System.out.println(length + " Game record(s) retrieved."); 
 		
 		System.out.println("Listing Platform by Criteria...");
-		pt.uminho.di.aa.PlatformCriteria lptuminhodiaaPlatformCriteria = new pt.uminho.di.aa.PlatformCriteria();
+		PlatformCriteria lptuminhodiaaPlatformCriteria = new PlatformCriteria();
 		// Please uncomment the follow line and fill in parameter(s) 
 		//lptuminhodiaaPlatformCriteria.ID.eq();
 		lptuminhodiaaPlatformCriteria.setMaxResults(ROW_COUNT);
-		pt.uminho.di.aa.Platform[] ptuminhodiaaPlatforms = lptuminhodiaaPlatformCriteria.listPlatform();
+		Platform[] ptuminhodiaaPlatforms = lptuminhodiaaPlatformCriteria.listPlatform();
 		length =ptuminhodiaaPlatforms== null ? 0 : Math.min(ptuminhodiaaPlatforms.length, ROW_COUNT); 
 		for (int i = 0; i < length; i++) {
 			 System.out.println(ptuminhodiaaPlatforms[i]);
@@ -82,7 +84,7 @@ public class ListTutorialData {
 				//listTutorialData.listByCriteria();
 			}
 			finally {
-				pt.uminho.di.aa.TutorialPersistentManager.instance().disposePersistentManager();
+				TutorialPersistentManager.instance().disposePersistentManager();
 			}
 		}
 		catch (Exception e) {
