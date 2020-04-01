@@ -95,7 +95,7 @@ public class Main {
         loadGame();
         createPlaform("XBox", 2006, "platform", "manufacturer");
         loadPlatform();
-        //listGames();
+        listGames();
         //listUsers();
     }
 }
