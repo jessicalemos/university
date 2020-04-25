@@ -5,21 +5,27 @@ import matplotlib.pyplot as plt
 #------------------------------------------------------------------------------
 # TO CUSTOMIZE THIS PSO CODE TO SOLVE UNCONSTRAINED OPTIMIZATION PROBLEMS, CHANGE THE PARAMETERS IN THIS SECTION ONLY:
 # THE FOLLOWING PARAMETERS MUST BE CHANGED.
-def objective_function(x):
+def func_pol(x,a):
     y = 0
-    for i in range(30):
-        y = y + math.pow(x[0] - x[1], 2)
+    for i in range(len(a)):
+        y = y + (a[i]* math.pow(x,i))
     return y
 
-bounds=[(-100,100),(-80,80)]   # upper and lower bounds of variables
-nv = len(bounds)               # number of variables
-mm = -1                        # if minimization problem, mm = -1; if maximization problem, mm = 1
+def objective_function(x):
+    return abs(math.sin(x[0]) - func_pol(x[0], x[1:]))
+
+n = 3                               # degree of polynomial function
+bounds = [(-math.pi/2, math.pi/2)]  # upper and lower bounds of variables
+for i in range(n + 1):
+    bounds.append((-100,100))
+nv = len(bounds)                    # number of variables
+mm = -1                             # if minimization problem, mm = -1; if maximization problem, mm = 1
 
 
 # THE FOLLOWING PARAMETERS ARE OPTINAL.
 particle_size = 100         # number of particles
 iterations = 200            # max number of iterations
-w = 0.85                    # inertia constant
+w = 0.2                    # inertia constant
 c1 = 1                      # cognative constant
 c2 = 2                      # social constant
 
@@ -27,18 +33,18 @@ c2 = 2                      # social constant
 #------------------------------------------------------------------------------    
 class Particle:
     def __init__(self,bounds):
-        self.particle_position=[]                     # particle position
-        self.particle_velocity=[]                     # particle velocity
-        self.local_best_particle_position=[]          # best position of the particle
-        self.fitness_local_best_particle_position= initial_fitness  # initial objective function value of the best particle position
-        self.fitness_particle_position=initial_fitness             # objective function value of the particle position
+        self.particle_position = []                     # particle position
+        self.particle_velocity = []                     # particle velocity
+        self.local_best_particle_position = []          # best position of the particle
+        self.fitness_local_best_particle_position = initial_fitness  # initial objective function value of the best particle position
+        self.fitness_particle_position = initial_fitness             # objective function value of the particle position
 
         for i in range(nv):
             self.particle_position.append(random.uniform(bounds[i][0],bounds[i][1])) # generate random initial position
-            self.particle_velocity.append(random.uniform(-1,1)) # generate random initial velocity
+            self.particle_velocity.append(random.uniform(-1,1))                      # generate random initial velocity
 
     def evaluate(self,objective_function):
-        self.fitness_particle_position=objective_function(self.particle_position)
+        self.fitness_particle_position = objective_function(self.particle_position)
         if mm == -1:
             if self.fitness_particle_position < self.fitness_local_best_particle_position:
                 self.local_best_particle_position = self.particle_position                  # update the local best
@@ -50,8 +56,8 @@ class Particle:
 
     def update_velocity(self,global_best_particle_position):
         for i in range(nv):
-            r1=random.random()
-            r2=random.random()
+            r1 = random.random()
+            r2 = random.random()
 
             cognitive_velocity = c1 * r1 * (self.local_best_particle_position[i] - self.particle_position[i])
             social_velocity = c2 * r2 * (global_best_particle_position[i] - self.particle_position[i])
@@ -71,7 +77,7 @@ class Particle:
 class PSO():
     def __init__(self,objective_function,bounds,particle_size,iterations):
 
-        fitness_global_best_particle_position=initial_fitness
+        fitness_global_best_particle_position = initial_fitness
         global_best_particle_position = []
 
         swarm_particle=[]
@@ -83,14 +89,15 @@ class PSO():
             for j in range(particle_size):
                 swarm_particle[j].evaluate(objective_function)
 
-                if mm ==-1:
+                if mm == -1:
                     if swarm_particle[j].fitness_particle_position < fitness_global_best_particle_position:
                         global_best_particle_position = list(swarm_particle[j].particle_position)
                         fitness_global_best_particle_position = float(swarm_particle[j].fitness_particle_position)
-                if mm ==1:
+                if mm == 1:
                     if swarm_particle[j].fitness_particle_position > fitness_global_best_particle_position:
                         global_best_particle_position = list(swarm_particle[j].particle_position)
                         fitness_global_best_particle_position = float(swarm_particle[j].fitness_particle_position)
+            
             for j in range(particle_size):
                 swarm_particle[j].update_velocity(global_best_particle_position)
                 swarm_particle[j].update_position(bounds)
