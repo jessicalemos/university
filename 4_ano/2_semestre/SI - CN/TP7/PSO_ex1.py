@@ -11,7 +11,7 @@ def objective_function(x):
         y = y + math.pow(x[0] - x[1], 2)
     return y
 
-bounds=[(-100,100),(-80,80)]   # upper and lower bounds of variables
+bounds = [(-100,100),(-80,80)] # upper and lower bounds of variables
 nv = len(bounds)               # number of variables
 mm = -1                        # if minimization problem, mm = -1; if maximization problem, mm = 1
 
@@ -19,7 +19,7 @@ mm = -1                        # if minimization problem, mm = -1; if maximizati
 # THE FOLLOWING PARAMETERS ARE OPTINAL.
 particle_size = 100         # number of particles
 iterations = 200            # max number of iterations
-w = 0.2                    # inertia constant
+w = 0.85                    # inertia constant
 c1 = 1                      # cognative constant
 c2 = 2                      # social constant
 
