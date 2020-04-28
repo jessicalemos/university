@@ -25,7 +25,7 @@ mm = -1                             # if minimization problem, mm = -1; if maxim
 # THE FOLLOWING PARAMETERS ARE OPTINAL.
 particle_size = 100         # number of particles
 iterations = 200            # max number of iterations
-w = 0.2                    # inertia constant
+w = 0.5                     # inertia constant
 c1 = 1                      # cognative constant
 c2 = 2                      # social constant
 
@@ -106,6 +106,7 @@ class PSO():
 
         print('Optimal solution: ', global_best_particle_position)
         print('Objective function value:', fitness_global_best_particle_position)
+        #plot
         plt.plot(A)
         plt.ylabel('Fitness Global Best Particle Position per Episode')
         plt.xlabel('Number of Episode')

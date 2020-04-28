@@ -100,6 +100,7 @@ class PSO():
 
         print('Optimal solution: ', global_best_particle_position)
         print('Objective function value:', fitness_global_best_particle_position)
+        #plot
         plt.plot(A)
         plt.ylabel('Fitness Global Best Particle Position per Episode')
         plt.xlabel('Number of Episode')
