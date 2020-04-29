@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Not really needed to run teh example in Netbeans... -->
+
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	 xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+	 version="3.1">
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+    <servlet>
+        <servlet-name>ListGames</servlet-name>
+        <servlet-class>web.ListGames</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ListGames</servlet-name>
+        <url-pattern>/ListGames</url-pattern>
+    </servlet-mapping>
+    <!--welcome-file-list>
+        <welcome-file>ListGames</welcome-file>
+    </welcome-file-list-->
+</web-app>
