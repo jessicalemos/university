@@ -23,33 +23,56 @@
       </div> <!-- row -->
       <div class="row bg-light">
         <div class="col-md-4 d-flex align-items-center">
-          <h3>User name</h3> 
-          
+            <c:if test="${requestScope.login=='success'}">
+                <div class="col-md-4 d-flex align-items-center">
+                    <h6>${requestScope.username}</h6> 
+                </div>
+            </c:if>
+            <c:if test="${requestScope.login!='success'}">
+                <a href="" data-toggle="modal" data-target="#modalLoginForm">
+                    Login
+                </a>
+                <jsp:include page="Login.jsp"/>
+            </c:if>
         </div>
         <div class="col-md-8">
           <nav class="navbar nav-pills justify-content-end">
-                <a class="nav-link active" href="allG">All Games</a>
-                <a class="nav-link" href="myG">My Games</a>
+                <a class="nav-link active" href="/GMSBaseNB/ListGames?page=1">All Games</a>
+                <a class="nav-link" href="/GMSBaseNB/ListGames?action=mygames">
+                    My Games
+                </a>
                 <a class="nav-link" href="addG">Add Games</a>
           </nav>
         </div> <!-- col -->
       </div> <!-- row --> 
       <div class="row">
         <div class="col-sm-8">
-          <jsp:include page="ListGames.jsp"/>
+             <c:choose>
+                <c:when test="${requestScope.template=='MyGames'}">
+                    <jsp:include page="MyGames.jsp"/>
+                </c:when>
+                <c:when test="${requestScope.template=='ListGames'}">
+                    <jsp:include page="ListGames.jsp"/>
+                </c:when>
+                <c:when test="${requestScope.template=='Game'}">
+                    <jsp:include page="Game.jsp"/>
+                </c:when>
+            </c:choose>     
         </div> <!-- col -->
         <div class="col-sm-4">
-          <form>
-            <fieldset>
-              <legend>Filter</legend>
-              <select class="form-control" >
-                <option>year</option>
-              </select>
-              <select class="form-control" >
-                <option>platform</option>
-              </select>
-            </fieldset>
-          </form>
+            <c:if test="${requestScope.template=='ListGames' || requestScope.template=='MyGames'}"> 
+                <form>
+                    <fieldset>
+                        <legend>Filter</legend>
+                        <select class="form-control" >
+                          <option>year</option>
+                        </select>
+                        <select class="form-control" >
+                          <option>platform</option>
+                        </select>
+                    </fieldset>
+                </form>
+            </c:if> 
         </div> <!-- col -->
       </div> <!-- row -->
       <div class="row">

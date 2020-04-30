@@ -5,6 +5,7 @@
 package business;
 
 import data.GameDAO;
+import data.UserDAO;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -25,16 +26,31 @@ public class GMSFacade {
         return games.subList(indexi, indexs);
     }
     
-    /*public static List<Game> listGames(int year) {
-        List<Game> games = GameDAO.list().stream()
-                                        .filter(g -> g.getYear() == year)
-                                        .collect(Collectors.toList());
+    public static List<Game> myGames() {
+        List<Game> games = GameDAO.mylist();
         return games;
-    }*/
-    
+    }
     
     public static List<Integer> getYears() {
         List<Integer> games = GameDAO.getYears();
         return games;
+    }
+    
+    public static Game getGameInfo(String name) {
+        for(Game g : GameDAO.list()){
+            if (g.getName().equals(name)){
+                return g;
+            }
+        }
+        return null;
+    }
+    
+    public static Boolean checkUser(String username, String password){
+        for(User u : UserDAO.list()){
+            if (u.getUsername().equals(username) && u.getPassword().equals(password)){
+                return true;
+            }
+        }
+        return false;
     }
 }

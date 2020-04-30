@@ -12,6 +12,6 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <a href="ListGames">List Games</a>
+        <a href="/GMSBaseNB/ListGames?page=1">List Games</a>
     </body>
 </html>

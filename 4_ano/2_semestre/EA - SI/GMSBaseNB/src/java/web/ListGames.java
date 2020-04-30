@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "ListGames", urlPatterns = {"/ListGames"})
 public class ListGames extends HttpServlet {
-
+    private String user;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -35,11 +35,42 @@ public class ListGames extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
-        System.out.println("Testing...");
-        List<Game> list = GMSFacade.listGames(Integer.parseInt(request.getParameter("page")));
-        System.out.println(list.toString());
-        request.setAttribute("games", list);
-        request.setAttribute("Template","ListGames");
+        if (user != null){
+            System.out.print(user);
+            request.setAttribute("username", user);
+            request.setAttribute("login","success");
+        } else {
+            String username = request.getParameter("username");
+            String password = request.getParameter("password");
+            if(username!=null && password!=null) {
+                Boolean check = GMSFacade.checkUser(username, password);
+                if (check){
+                    user = username;
+                    request.setAttribute("username", user);
+                    request.setAttribute("login","success");
+                }
+            }
+        }
+        String action = (String) request.getParameter("action");
+        System.out.println(action);
+        if (action != null && action.equals("mygames")) {
+                List<Game> mylist = GMSFacade.myGames();
+                System.out.println(mylist.toString());
+                request.setAttribute("mygames",mylist);
+                request.setAttribute("template","MyGames");
+        } else {
+            String game = (String) request.getParameter("mygame");
+            if (game != null){
+                Game g = GMSFacade.getGameInfo(game);
+                request.setAttribute("game",g);
+                request.setAttribute("template","Game");
+            } else {
+                List<Game> list = GMSFacade.listGames(Integer.parseInt(request.getParameter("page")));
+                System.out.println(list.toString());
+                request.setAttribute("games", list);
+                request.setAttribute("template","ListGames");
+            }
+        }
         getServletConfig().getServletContext()
             .getRequestDispatcher("/WEB-INF/Template.jsp").forward(request,response);
     }

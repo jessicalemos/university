@@ -20,7 +20,7 @@ public class GameDAO {
      */
     public static List<Game> list() {
         List<Game> r = new ArrayList<>();
-        r.add(new Game(1, "Tetris", 1989, 10, ""));
+        r.add(new Game(1, "Tetris", 1989, 10, "Description of the game Tetris!"));
         r.add(new Game(2, "GTA V", 2013, 60, ""));
         r.add(new Game(3, "Assetto Corsa", 2014, 30, ""));
         r.add(new Game(4, "Fallout 4", 2014, 30, ""));
@@ -28,9 +28,20 @@ public class GameDAO {
         r.add(new Game(6, "FIFA", 1989, 10, ""));
         r.add(new Game(7, "PES", 1989, 10, ""));
         r.add(new Game(8, "CS", 1989, 10, ""));
+        r.add(new Game(9, "Minecraft", 2009, 20, ""));
+        r.add(new Game(10, "Fortnite ", 2017, 30, ""));
+        r.add(new Game(11, "Pack-Man", 1980, 10, ""));
         return r;
     }
     
+    public static List<Game> mylist() {
+        List<Game> r = new ArrayList<>();
+        r.add(new Game(1, "Tetris", 1989, 10, ""));
+        r.add(new Game(2, "GTA V", 2013, 60, ""));
+        r.add(new Game(3, "Assetto Corsa", 2014, 30, ""));
+        r.add(new Game(4, "Fallout 4", 2014, 30, ""));
+        return r;
+    }
     
     public static List<Integer> getYears() {
         List<Integer> l = new ArrayList<>();
@@ -38,6 +49,9 @@ public class GameDAO {
         l.add(2013);
         l.add(2014);
         l.add(2017);
+        l.add(2009);
+        l.add(2017);
+        l.add(1980);
         return l;
     }
     
