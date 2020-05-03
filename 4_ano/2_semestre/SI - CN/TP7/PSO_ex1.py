@@ -2,9 +2,6 @@ import random
 import math
 import matplotlib.pyplot as plt
 
-#------------------------------------------------------------------------------
-# TO CUSTOMIZE THIS PSO CODE TO SOLVE UNCONSTRAINED OPTIMIZATION PROBLEMS, CHANGE THE PARAMETERS IN THIS SECTION ONLY:
-# THE FOLLOWING PARAMETERS MUST BE CHANGED.
 def objective_function(x):
     y = 0
     for i in range(30):
@@ -16,14 +13,14 @@ nv = len(bounds)               # number of variables
 mm = -1                        # if minimization problem, mm = -1; if maximization problem, mm = 1
 
 
-# THE FOLLOWING PARAMETERS ARE OPTINAL.
+# the following parameters are optional
 particle_size = 100         # number of particles
 iterations = 200            # max number of iterations
 w = 0.85                    # inertia constant
 c1 = 1                      # cognative constant
 c2 = 2                      # social constant
 
-# END OF THE CUSTOMIZATION SECTION
+# end of the customization section
 #------------------------------------------------------------------------------    
 class Particle:
     def __init__(self,bounds):
