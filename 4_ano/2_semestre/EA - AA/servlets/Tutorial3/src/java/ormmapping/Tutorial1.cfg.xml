@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: Universidade do Minho
+License Type: Academic
+-->
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+ "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory>
+   	<!-- properties -->
+		<property name="dialect">org.hibernate.dialect.MySQLDialect</property>
+		<property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+		<property name="connection.url">jdbc:mysql://localhost/data</property>
+		<property name="connection.username">root</property>
+		<property name="connection.password">PASSWORD</property>
+		<property name="show_sql">false</property>
+		<property name="query.substitutions">true 1, false 0, yes 'Y', no 'N'</property>
+		<!-- mapping files -->
+		<mapping resource="ormmapping/main/Game.hbm.xml" />
+		<mapping resource="ormmapping/main/Platform.hbm.xml" />
+		<mapping resource="ormmapping/main/User.hbm.xml" />
+	</session-factory>
+</hibernate-configuration>
