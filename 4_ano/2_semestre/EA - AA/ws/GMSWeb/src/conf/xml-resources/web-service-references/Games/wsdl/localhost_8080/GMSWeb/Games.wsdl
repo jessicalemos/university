@@ -1,0 +1,318 @@
+<?xml version='1.0' encoding='UTF-8'?><wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://ws/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" name="Games" targetNamespace="http://ws/">
+  <wsdl:types>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://ws/" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://ws/">
+  <xs:element name="delete" type="tns:delete"/>
+  <xs:element name="deleteResponse" type="tns:deleteResponse"/>
+  <xs:element name="listGames" type="tns:listGames"/>
+  <xs:element name="listGamesResponse" type="tns:listGamesResponse"/>
+  <xs:element name="listGames_1" type="tns:listGames_1"/>
+  <xs:element name="listGames_1Response" type="tns:listGames_1Response"/>
+  <xs:element name="registerGame" type="tns:registerGame"/>
+  <xs:element name="registerGameResponse" type="tns:registerGameResponse"/>
+  <xs:element name="sayHello" type="tns:sayHello"/>
+  <xs:element name="sayHelloResponse" type="tns:sayHelloResponse"/>
+  <xs:element name="searchGame" type="tns:searchGame"/>
+  <xs:element name="searchGameResponse" type="tns:searchGameResponse"/>
+  <xs:complexType name="sayHello">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="name" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="sayHelloResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="listGames_1">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="s" type="tns:persistentSession"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="persistentSession">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="cacheMode" type="tns:cacheMode"/>
+      <xs:element name="defaultReadOnly" type="xs:boolean"/>
+      <xs:element minOccurs="0" name="flushMode" type="tns:flushMode"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="listGames_1Response">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:game"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="game">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="description" type="xs:string"/>
+      <xs:element minOccurs="0" name="name" type="xs:string"/>
+      <xs:element minOccurs="0" name="platform" type="tns:platform"/>
+      <xs:element name="price" type="xs:double"/>
+      <xs:element name="year" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="platform">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="description" type="xs:string"/>
+      <xs:element minOccurs="0" name="manufacturer" type="xs:string"/>
+      <xs:element minOccurs="0" name="name" type="xs:string"/>
+      <xs:element name="year" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="registerGame">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="game" type="tns:game"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="registerGameResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:game"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="searchGame">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="session" type="tns:persistentSession"/>
+      <xs:element minOccurs="0" name="keyword" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="searchGameResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:game"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="listGames">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="session" type="tns:persistentSession"/>
+      <xs:element minOccurs="0" name="user" type="tns:user"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="user">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="game" type="tns:gameSetCollection"/>
+      <xs:element minOccurs="0" name="email" type="xs:string"/>
+      <xs:element minOccurs="0" name="name" type="xs:string"/>
+      <xs:element minOccurs="0" name="password" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="gameSetCollection">
+    <xs:complexContent>
+      <xs:extension base="tns:ormSet">
+        <xs:sequence/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType abstract="true" name="ormSet">
+    <xs:sequence/>
+  </xs:complexType>
+  <xs:complexType name="listGamesResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:game"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="delete">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="game" type="tns:game"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="deleteResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="cacheMode">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="NORMAL"/>
+      <xs:enumeration value="IGNORE"/>
+      <xs:enumeration value="GET"/>
+      <xs:enumeration value="PUT"/>
+      <xs:enumeration value="REFRESH"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="flushMode">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="NEVER"/>
+      <xs:enumeration value="MANUAL"/>
+      <xs:enumeration value="COMMIT"/>
+      <xs:enumeration value="AUTO"/>
+      <xs:enumeration value="ALWAYS"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="PersistentException" type="tns:PersistentException"/>
+  <xs:complexType name="PersistentException">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="message" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="registerGameResponse">
+    <wsdl:part element="tns:registerGameResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="sayHello">
+    <wsdl:part element="tns:sayHello" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="PersistentException">
+    <wsdl:part element="tns:PersistentException" name="PersistentException">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="listGames_1">
+    <wsdl:part element="tns:listGames_1" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="sayHelloResponse">
+    <wsdl:part element="tns:sayHelloResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="listGames">
+    <wsdl:part element="tns:listGames" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="delete">
+    <wsdl:part element="tns:delete" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="searchGameResponse">
+    <wsdl:part element="tns:searchGameResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="deleteResponse">
+    <wsdl:part element="tns:deleteResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="listGamesResponse">
+    <wsdl:part element="tns:listGamesResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="registerGame">
+    <wsdl:part element="tns:registerGame" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="searchGame">
+    <wsdl:part element="tns:searchGame" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="listGames_1Response">
+    <wsdl:part element="tns:listGames_1Response" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="Games">
+    <wsdl:operation name="sayHello">
+      <wsdl:input message="tns:sayHello" name="sayHello">
+    </wsdl:input>
+      <wsdl:output message="tns:sayHelloResponse" name="sayHelloResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="listGames_1">
+      <wsdl:input message="tns:listGames_1" name="listGames_1">
+    </wsdl:input>
+      <wsdl:output message="tns:listGames_1Response" name="listGames_1Response">
+    </wsdl:output>
+      <wsdl:fault message="tns:PersistentException" name="PersistentException">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="registerGame">
+      <wsdl:input message="tns:registerGame" name="registerGame">
+    </wsdl:input>
+      <wsdl:output message="tns:registerGameResponse" name="registerGameResponse">
+    </wsdl:output>
+      <wsdl:fault message="tns:PersistentException" name="PersistentException">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="searchGame">
+      <wsdl:input message="tns:searchGame" name="searchGame">
+    </wsdl:input>
+      <wsdl:output message="tns:searchGameResponse" name="searchGameResponse">
+    </wsdl:output>
+      <wsdl:fault message="tns:PersistentException" name="PersistentException">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="listGames">
+      <wsdl:input message="tns:listGames" name="listGames">
+    </wsdl:input>
+      <wsdl:output message="tns:listGamesResponse" name="listGamesResponse">
+    </wsdl:output>
+      <wsdl:fault message="tns:PersistentException" name="PersistentException">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="delete">
+      <wsdl:input message="tns:delete" name="delete">
+    </wsdl:input>
+      <wsdl:output message="tns:deleteResponse" name="deleteResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="GamesSoapBinding" type="tns:Games">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="sayHello">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="sayHello">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="sayHelloResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="listGames_1">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="listGames_1">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="listGames_1Response">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="PersistentException">
+        <soap:fault name="PersistentException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="registerGame">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="registerGame">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="registerGameResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="PersistentException">
+        <soap:fault name="PersistentException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="searchGame">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="searchGame">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="searchGameResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="PersistentException">
+        <soap:fault name="PersistentException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="listGames">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="listGames">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="listGamesResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="PersistentException">
+        <soap:fault name="PersistentException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="delete">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="delete">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="deleteResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Games">
+    <wsdl:port binding="tns:GamesSoapBinding" name="GamesPort">
+      <soap:address location="http://localhost:8080/GMSWeb/Games"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

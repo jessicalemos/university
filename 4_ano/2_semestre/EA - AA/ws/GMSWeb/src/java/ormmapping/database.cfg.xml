@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Database>
+  <Setting type="32">
+    <Driver></Driver>
+    <DriverFiles></DriverFiles>
+    <Dialect></Dialect>
+    <DriverClass></DriverClass>
+    <URL></URL>
+    <UserName></UserName>
+    <Password></Password>
+    <HostName></HostName>
+    <PortNO></PortNO>
+    <DBName></DBName>
+    <ServiceName></ServiceName>
+    <ServerName></ServerName>
+    <SelectedForm>true</SelectedForm>
+  </Setting>
+  <Setting type="8">
+    <Driver></Driver>
+    <DriverFiles></DriverFiles>
+    <Dialect></Dialect>
+    <DriverClass></DriverClass>
+    <URL></URL>
+    <UserName></UserName>
+    <Password></Password>
+    <HostName></HostName>
+    <PortNO></PortNO>
+    <DBName></DBName>
+    <ServiceName></ServiceName>
+    <ServerName></ServerName>
+    <SelectedForm>true</SelectedForm>
+  </Setting>
+  <Setting type="2">
+    <Driver>MySQL (Connector/J Driver)</Driver>
+    <DriverFiles>&lt;&lt;MySQL Connector/J 5.1.33&gt;&gt;</DriverFiles>
+    <Dialect>org.hibernate.dialect.MySQLDialect</Dialect>
+    <DriverClass>com.mysql.jdbc.Driver</DriverClass>
+    <URL>jdbc:mysql://localhost/data?serverTimezone=UTC</URL>
+    <UserName>root</UserName>
+    <EncryptedPassword>F4CA9FDDDDB89DF6D8A7389E22FA6031</EncryptedPassword>
+    <HostName>localhost</HostName>
+    <PortNO></PortNO>
+    <DBName>data</DBName>
+    <ServiceName></ServiceName>
+    <ServerName></ServerName>
+    <SelectedForm>true</SelectedForm>
+  </Setting>
+</Database>
