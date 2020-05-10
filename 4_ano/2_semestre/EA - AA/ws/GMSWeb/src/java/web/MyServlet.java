@@ -40,15 +40,18 @@ public class MyServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
+        //response.setContentType("text/html;charset=UTF-8");
         
         String[] url = request.getRequestURI().toString().split("/");
         String target = url[url.length-1];
         String method = request.getMethod();
         ObjectMapper mapper = new ObjectMapper();
         
-        request.setAttribute("target", target);
-        request.setAttribute("method", method);
+        //request.setAttribute("target", target);
+        //request.setAttribute("method", method);
+        
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
         try {
             List<Game> games = newSessionBean.listGames(Util.getSession(request));
             String data = "";
@@ -70,7 +73,7 @@ public class MyServlet extends HttpServlet {
                 for (Game g : games) {
                     if (g.getName().equals(name)) {
                         sJSON = mapper.writeValueAsString(g);
-                        request.setAttribute("games", sJSON);
+                        response.getWriter().write(sJSON);
                     }
                 }
             } else {
@@ -80,13 +83,12 @@ public class MyServlet extends HttpServlet {
                     list.add(g.getName());
                 }
                 String sJSON = mapper.writeValueAsString(list);
-                request.setAttribute("games", sJSON);
+                response.getWriter().write(sJSON);
             }
         } catch (Exception e) {
              e.printStackTrace();
         }
- 
-        request.getRequestDispatcher("/WEB-INF/myServlet.jsp").forward(request, response);
+       // request.getRequestDispatcher("/WEB-INF/myServlet.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
