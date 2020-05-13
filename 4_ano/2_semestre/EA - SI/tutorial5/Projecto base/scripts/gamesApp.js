@@ -44,16 +44,17 @@ var vm = new Vue({
     },
     computed: {
         gamesFiltered: function () {
+            console.log(this.selYear, this.selPlatform);
             this.page = 0;
             if(this.selYear != 'year' && this.selPlatform != 'platform') {
                 return this.games.filter((game) => 
                 game.year === this.selYear && game.platform === this.selPlatform)
             }
-            if (this.selPlatform != 'platform') {
-                return this.games.filter((game) => game.platform === this.selPlatform)
-            }
             if (this.selYear != 'year') {
                 return this.games.filter((game) => game.year === this.selYear)
+            }
+            if (this.selPlatform != 'platform') {
+                return this.games.filter((game) => game.platform === this.selPlatform)
             }
             return this.games;
         },
@@ -72,7 +73,7 @@ var vm = new Vue({
                 sublist = this.gamesFiltered.slice(indexi, indexs);
                 list.push(sublist);
             }
-            console.log(this.page);
+            console.log(list);
             return list;
         }
     },
@@ -152,5 +153,88 @@ Vue.component('games-filter', {
                 </select>
             </fieldset>
         </form>
+        `
+})
+
+Vue.component('games-filter', {
+    props:  ['listOfGames', 'selYear', 'selPlatform'],
+    data: function () {
+        return {
+            year: this.selYear,
+            platform: this.selPlatform
+        }
+    },
+    computed: {
+        years: function () {
+            var list = [];
+            this.listOfGames.forEach(function (g) {
+                if (!(list.includes(g.year))) {
+                    list.push(g.year);
+                }
+            });
+            return list;
+        },
+        platforms: function () {
+            var list = [];
+            this.listOfGames.forEach(function (g) {
+                if (!(list.includes(g.platform))) {
+                    list.push(g.platform);
+                }
+            });
+            return list;
+        },
+    },
+    template: `
+        <form>
+            <fieldset>
+                <legend>Filter</legend>
+                <select class="form-control" v-model.number="year" v-on:change="$emit('newyear', year)">
+                    <option>year</option>
+                    <option v-for="y in years">{{y}}</option>
+                </select>
+                <select class="form-control" v-model="platform" v-on:change="$emit('newplatform', platform)">
+                    <option>platform</option>
+                    <option v-for="p in platforms">{{p}}</option>
+                </select>
+            </fieldset>
+        </form>
+        `
+})
+
+Vue.component('games-list', {
+    props:  ['listGamesPaginated', 'listGamesFiltered', 'actualPage', 'numPages', 'selGame'],
+    template: `
+        <div class="col-sm-8">
+            <table class="table table-striped table-bordered table-sm">
+                <thead>
+                    <tr><th>Games</th><th class="extras">Year</th><th>Platform</th></tr>
+                </thead>
+                <tbody>
+                    <tr v-for="g in listGamesPaginated[actualPage]"
+                    v-bind:key="g.id"
+                    v-on:click="selGame == g ? $emit('newselgame', {}) : $emit('newselgame', g)">
+                        <td>{{g.name}}</td><td>{{g.year}}</td><td>{{g.platform}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <nav class="d-flex justify-content-end" v-if="listGamesFiltered.length>4">
+                <form class="pagination">
+                    <button type="button" 
+                        v-on:click="$emit('newpage', actualPage-1)" 
+                        v-on:click.ctrl="$emit('newpage', 0)"
+                        v-bind:disabled="actualPage==0">&Lt;
+                    </button>
+                    <button v-for="idx in numPages" type="button" v-on:click="$emit('newpage', idx-1)">
+                        {{idx}}
+                    </button>
+                    <button type="button" 
+                        v-on:click="$emit('newpage', actualPage+1)" 
+                        v-on:click.ctrl="$emit('newpage', numPages-1)" 
+                        v-bind:disabled="actualPage==numPages-1" >
+                        &Gt;
+                    </button>
+                </form>
+            </nav>
+        </div>
         `
 })

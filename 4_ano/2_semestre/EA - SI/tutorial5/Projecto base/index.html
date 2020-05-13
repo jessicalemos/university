@@ -30,33 +30,21 @@
         </div> <!-- col -->
       </div> <!-- row -->
       <div class="row">
-        <div class="col-sm-8">
-          <table class="table table-striped table-bordered table-sm">
-            <thead>
-              <tr><th>Games</th><th class="extras">Year</th><th>Platform</th></tr>
-            </thead>
-            <tbody>
-              <tr v-for="g in gamesPaginated[page]"
-                v-bind:key="g.id"
-                v-on:click="selGame == g ? selGame = {} : selGame = g">
-                <td>{{g.name}}</td><td>{{g.year}}</td><td>{{g.platform}}</td>
-              </tr>
-            </tbody>
-          </table>
-          <p>{{load}}</p>
-          <nav class="d-flex justify-content-end" v-if="gamesFiltered.length>4">
-            <form class="pagination">
-              <button type="button" v-on:click="page -= 1" v-on:click.ctrl="page = 0" v-bind:disabled="page==0">&Lt;</button>
-              <button v-for="idx in gamesPaginated.length" type="button" v-on:click="page = idx - 1">{{idx}}</button>
-              <button type="button" v-on:click="page += 1" v-on:click.ctrl="page = gamesPaginated.length-1" v-bind:disabled="page==gamesPaginated.length-1" >
-                &Gt;
-              </button>
-            </form>
-          </nav>
-          <game-show v-bind:game="selGame" v-if="selGame.id" v-on:back="selGame={}"></game-show>
-        </div> <!-- col -->
+        <games-list v-show="Object.keys(selGame).length === 0" 
+          v-bind:list-games-paginated="gamesPaginated" 
+          v-bind:list-games-filtered="gamesFiltered" 
+          v-bind:actual-page="page" 
+          v-on:newpage="page=$event"
+          v-bind:num-pages="gamesPaginated.length" 
+          v-bind:sel-game="selGame"
+          v-on:newselGame="selGame=$event"
+        ></games-list>
+        <game-show v-show="selGame!={}" v-bind:game="selGame" v-if="selGame.id" 
+          v-on:back="selGame={}">
+        </game-show>
         <div class="col-sm-4">
           <games-filter v-bind:list-of-games="games"
+            v-show="Object.keys(selGame).length === 0"
             v-bind:sel-year="selYear"
             v-on:newyear="selYear=$event"
             v-bind:sel-platform="selPlatform"
