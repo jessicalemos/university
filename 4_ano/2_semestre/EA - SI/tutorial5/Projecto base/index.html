@@ -36,7 +36,9 @@
               <tr><th>Games</th><th class="extras">Year</th><th>Platform</th></tr>
             </thead>
             <tbody>
-              <tr v-for="g in gamesPaginated[page]">
+              <tr v-for="g in gamesPaginated[page]"
+                v-bind:key="g.id"
+                v-on:click="selGame == g ? selGame = {} : selGame = g">
                 <td>{{g.name}}</td><td>{{g.year}}</td><td>{{g.platform}}</td>
               </tr>
             </tbody>
@@ -44,27 +46,22 @@
           <p>{{load}}</p>
           <nav class="d-flex justify-content-end" v-if="gamesFiltered.length>4">
             <form class="pagination">
-              <button type="button" v-on:click="page += 1">&Lt;</button>
+              <button type="button" v-on:click="page -= 1" v-on:click.ctrl="page = 0" v-bind:disabled="page==0">&Lt;</button>
               <button v-for="idx in gamesPaginated.length" type="button" v-on:click="page = idx - 1">{{idx}}</button>
-              <button type="button" v-on:click="page -= 1">&Gt;</button>
+              <button type="button" v-on:click="page += 1" v-on:click.ctrl="page = gamesPaginated.length-1" v-bind:disabled="page==gamesPaginated.length-1" >
+                &Gt;
+              </button>
             </form>
           </nav>
+          <game-show v-bind:game="selGame" v-if="selGame.id" v-on:back="selGame={}"></game-show>
         </div> <!-- col -->
         <div class="col-sm-4">
-          <form>
-            <fieldset>
-              <legend>Filter</legend>
-              <select class="form-control" v-model.number="selYear">
-                <option>year</option>
-                <option v-for="year in years">{{year}}</option>
-              </select>
-
-              <select class="form-control" v-model="selPlatform">
-                <option>platform</option>
-                <option v-for="platform in platforms">{{platform}}</option>
-              </select>
-            </fieldset>
-          </form>
+          <games-filter v-bind:list-of-games="games"
+            v-bind:sel-year="selYear"
+            v-on:newyear="selYear=$event"
+            v-bind:sel-platform="selPlatform"
+            v-on:newplatform="selPlatform=$event">
+          </games-filter>
         </div> <!-- col -->
       </div> <!-- row -->
       <div class="row">

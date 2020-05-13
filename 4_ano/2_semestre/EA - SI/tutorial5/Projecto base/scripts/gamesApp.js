@@ -39,27 +39,10 @@ var vm = new Vue({
         selYear: 'year',
         selPlatform: 'platform',
         load: '',
-        page: 0
+        page: 0,
+        selGame: {}
     },
     computed: {
-        years: function () {
-            var list = [];
-            this.games.forEach(function (g) {
-                if (!(list.includes(g.year))) {
-                    list.push(g.year);
-                }
-            });
-            return list;
-        },
-        platforms: function () {
-            var list = [];
-            this.games.forEach(function (g) {
-                if (!(list.includes(g.platform))) {
-                    list.push(g.platform);
-                }
-            });
-            return list;
-        },
         gamesFiltered: function () {
             this.page = 0;
             if(this.selYear != 'year' && this.selPlatform != 'platform') {
@@ -88,8 +71,8 @@ var vm = new Vue({
                     indexs = len;
                 sublist = this.gamesFiltered.slice(indexi, indexs);
                 list.push(sublist);
-                console.log(sublist);
             }
+            console.log(this.page);
             return list;
         }
     },
@@ -110,3 +93,64 @@ var vm = new Vue({
     }
 })
 
+Vue.component('game-show', {
+    props: ['game'],
+    template: `
+    <div>
+        <h3>{{game.name}}</h3>
+        <p>
+            Id: {{game.id}}<br />
+            Year: {{game.year}}<br />
+            Price: {{game.price}}<br />
+            Description: {{game.description}}<br />
+            Platform: {{game.platform}}
+        </p>
+        <button v-on:click="$emit('back')">Back</button>
+    </div>
+    `
+})
+
+Vue.component('games-filter', {
+    props:  ['listOfGames', 'selYear', 'selPlatform'],
+    data: function () {
+        return {
+            year: this.selYear, // local copy of prop
+            platform: this.selPlatform
+        }
+    },
+    computed: {
+        years: function () {
+            var list = [];
+            this.listOfGames.forEach(function (g) {
+                if (!(list.includes(g.year))) {
+                    list.push(g.year);
+                }
+            });
+            return list;
+        },
+        platforms: function () {
+            var list = [];
+            this.listOfGames.forEach(function (g) {
+                if (!(list.includes(g.platform))) {
+                    list.push(g.platform);
+                }
+            });
+            return list;
+        },
+    },
+    template: `
+        <form>
+            <fieldset>
+                <legend>Filter</legend>
+                <select class="form-control" v-model.number="year" v-on:change="$emit('newyear', year)">
+                    <option>year</option>
+                    <option v-for="y in years">{{y}}</option>
+                </select>
+                <select class="form-control" v-model="platform" v-on:change="$emit('newplatform', platform)">
+                    <option>platform</option>
+                    <option v-for="p in platforms">{{p}}</option>
+                </select>
+            </fieldset>
+        </form>
+        `
+})
