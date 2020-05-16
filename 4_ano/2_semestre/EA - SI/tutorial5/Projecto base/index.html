@@ -39,7 +39,7 @@
           v-bind:sel-game="selGame"
           v-on:newselGame="selGame=$event"
         ></games-list>
-        <game-show v-show="selGame!={}" v-bind:game="selGame" v-if="selGame.id" 
+        <game-show v-show="Object.keys(selGame).length != 0" v-bind:game="selGame" v-if="selGame.id" 
           v-on:back="selGame={}">
         </game-show>
         <div class="col-sm-4">
