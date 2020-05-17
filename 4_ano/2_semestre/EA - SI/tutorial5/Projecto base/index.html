@@ -30,17 +30,19 @@
         </div> <!-- col -->
       </div> <!-- row -->
       <div class="row">
-        <games-list v-show="Object.keys(selGame).length === 0" 
-          v-bind:list-games-paginated="gamesPaginated" 
-          v-bind:list-games-filtered="gamesFiltered" 
-          v-bind:actual-page="page" 
-          v-on:newpage="page=$event"
-          v-bind:num-pages="gamesPaginated.length" 
-          v-bind:sel-game="selGame"
-          v-on:newselGame="selGame=$event"
-        ></games-list>
-        <game-show v-show="Object.keys(selGame).length != 0" v-bind:game="selGame" v-if="selGame.id" 
-          v-on:back="selGame={}">
+        <div class="col-sm-8">
+          <games-list v-show="Object.keys(selGame).length === 0" 
+            v-bind:list-games-paginated="gamesPaginated" 
+            v-bind:list-games-filtered="gamesFiltered" 
+            v-bind:actual-page="page" 
+            v-on:newpage="page=$event"
+            v-bind:num-pages="gamesPaginated.length" 
+            v-bind:sel-game="selGame"
+            v-on:newselGame="selGame=$event"
+          ></games-list>
+          <game-show v-show="Object.keys(selGame).length != 0" v-bind:game="selGame" v-if="selGame.id" 
+            v-on:back="selGame={}">
+        </div>
         </game-show>
         <div class="col-sm-4">
           <games-filter v-bind:list-of-games="games"
