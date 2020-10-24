@@ -22,3 +22,16 @@ Here you can find exercises, reports and projects from Software Engineering cour
   - Computer Communications
   - [Languages Processing](https://github.com/jessicalemos/PL)
 - 4st year
+  - [NoSQL Databases](https://github.com/jessicalemos/Sakila-NoSQL)
+  - Introduction to Natural Language Processing
+  ### Application Engineering
+  - Database Administration
+  - Interactive Systems
+  - Application Architectures
+  - [AA & SI Project](https://github.com/jessicalemos/BookMe)
+  ### Smart Systems
+  - Learning and Knowledge Extraction
+  - [Smart Agents](https://github.com/jessicalemos/fire-fighting)
+  - Autonomous Systems
+  - Natural Computing
+  
